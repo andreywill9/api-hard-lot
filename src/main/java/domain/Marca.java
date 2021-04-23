@@ -1,6 +1,5 @@
 package domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -10,7 +9,7 @@ public class Marca extends ObjetoDominio {
 
   private String nome;
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "marca")
+  @OneToMany()
   private List<Produto> produtos;
 
   public String getNome() {

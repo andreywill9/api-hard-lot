@@ -1,8 +1,12 @@
 package controller.dto;
 
-import domain.Produto;
+import domain.*;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProdutoDto {
@@ -15,7 +19,13 @@ public class ProdutoDto {
 
   private BigDecimal peso;
 
-  private List<PrecoDto> precos;
+  private BigDecimal precoComum;
+
+  private BigDecimal precoPromocional;
+
+  private String inicioDataPromocao;
+
+  private String fimDataPromocao;
 
   private String codigoBarras;
 
@@ -27,20 +37,35 @@ public class ProdutoDto {
 
   private String descricao;
 
-  private PisCofinsDto pisCofins;
+  private Long idPisCofins;
 
-  private IcmsDto icms;
+  private Long idIcms;
 
   public ProdutoDto() {}
 
-  public static Produto paraDominio(ProdutoDto dto) {
-    //TODO outros atributos
+  public static Produto paraDominio(ProdutoDto dto, PisCofins pisCofins, Icms icms, List<Fornecedor> fornecedores, Marca marca, List<Departamento> departamentos) throws ParseException {
     Produto produto = new Produto();
     produto.setId(dto.id);
     produto.setNome(dto.nome);
     produto.setPeso(dto.peso);
     produto.setCodigoBarras(dto.codigoBarras);
     produto.setDescricao(dto.descricao);
+    produto.setFornecedores(fornecedores);
+    produto.setEstoque(dto.estoque);
+    produto.setPisCofins(pisCofins);
+    produto.setIcms(icms);
+    produto.setMarca(marca);
+    produto.setDepartamentos(departamentos);
+    List<Preco> precos = new ArrayList<>();
+    if (dto.precoComum != null) {
+      precos.add(Preco.precoComum(dto.precoComum, produto));
+    }
+    if (dto.precoPromocional != null) {
+      Date inicioPromocao = new SimpleDateFormat("dd/MM/yyyy").parse(dto.inicioDataPromocao);
+      Date fimPromocao = new SimpleDateFormat("dd/MM/yyyy").parse(dto.fimDataPromocao);
+      precos.add(Preco.precoPromocional(dto.precoPromocional, produto, inicioPromocao, fimPromocao));
+    }
+    produto.setPrecos(precos);
     return produto;
   }
 
@@ -76,12 +101,36 @@ public class ProdutoDto {
     this.peso = peso;
   }
 
-  public List<PrecoDto> getPrecos() {
-    return precos;
+  public BigDecimal getPrecoComum() {
+    return precoComum;
   }
 
-  public void setPrecos(List<PrecoDto> precos) {
-    this.precos = precos;
+  public void setPrecoComum(BigDecimal precoComum) {
+    this.precoComum = precoComum;
+  }
+
+  public BigDecimal getPrecoPromocional() {
+    return precoPromocional;
+  }
+
+  public void setPrecoPromocional(BigDecimal precoPromocional) {
+    this.precoPromocional = precoPromocional;
+  }
+
+  public String getInicioDataPromocao() {
+    return inicioDataPromocao;
+  }
+
+  public void setInicioDataPromocao(String inicioDataPromocao) {
+    this.inicioDataPromocao = inicioDataPromocao;
+  }
+
+  public String getFimDataPromocao() {
+    return fimDataPromocao;
+  }
+
+  public void setFimDataPromocao(String fimDataPromocao) {
+    this.fimDataPromocao = fimDataPromocao;
   }
 
   public String getCodigoBarras() {
@@ -124,19 +173,19 @@ public class ProdutoDto {
     this.descricao = descricao;
   }
 
-  public PisCofinsDto getPisCofins() {
-    return pisCofins;
+  public Long getIdPisCofins() {
+    return idPisCofins;
   }
 
-  public void setPisCofins(PisCofinsDto pisCofins) {
-    this.pisCofins = pisCofins;
+  public void setIdPisCofins(Long idPisCofins) {
+    this.idPisCofins = idPisCofins;
   }
 
-  public IcmsDto getIcms() {
-    return icms;
+  public Long getIdIcms() {
+    return idIcms;
   }
 
-  public void setIcms(IcmsDto icms) {
-    this.icms = icms;
+  public void setIdIcms(Long idIcms) {
+    this.idIcms = idIcms;
   }
 }

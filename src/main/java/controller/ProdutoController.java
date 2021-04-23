@@ -1,7 +1,7 @@
 package controller;
 
 import controller.dto.ProdutoDto;
-import infraestructure.ServicoProduto;
+import services.ServicoProduto;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -22,8 +22,8 @@ public class ProdutoController {
   ServicoProduto servicoProduto;
 
   @POST
-  public Response cadastrarProduto(ProdutoDto json) {
-    return servicoProduto.cadastrar(json);
+  public Response cadastrarProduto(ProdutoDto dto) {
+    return servicoProduto.cadastrar(dto);
   }
 
 }

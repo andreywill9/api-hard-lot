@@ -16,6 +16,7 @@ public class Preco extends ObjetoDominio {
   @JoinColumn(name = "produto_id")
   private Produto produto;
 
+  @Column(name = "tipo_preco")
   private TipoPreco tipoPreco;
 
   @Temporal(TemporalType.TIMESTAMP)
@@ -25,6 +26,24 @@ public class Preco extends ObjetoDominio {
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "fim_promocao")
   private Date fimPromocao;
+
+  public static Preco precoComum(BigDecimal valor, Produto produto) {
+    Preco preco = new Preco();
+    preco.setValor(valor);
+    preco.setTipoPreco(TipoPreco.COMUM);
+    preco.setProduto(produto);
+    return preco;
+  }
+
+  public static Preco precoPromocional(BigDecimal valor, Produto produto, Date inicioPromocao, Date fimPromocao) {
+    Preco preco = new Preco();
+    preco.setValor(valor);
+    preco.setTipoPreco(TipoPreco.PROMOCIONAL);
+    preco.setInicioPromocao(inicioPromocao);
+    preco.setFimPromocao(fimPromocao);
+    preco.setProduto(produto);
+    return preco;
+  }
 
   public Preco() {}
 

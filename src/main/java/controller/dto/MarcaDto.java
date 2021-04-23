@@ -1,10 +1,33 @@
 package controller.dto;
 
+import domain.Marca;
+
 public class MarcaDto {
 
-  Long id;
+  private Long id;
 
-  String nome;
+  private String nome;
+
+  public static MarcaDto instanciarDeDomain(Marca marca) {
+    MarcaDto dto = new MarcaDto();
+    dto.id = marca.getId();
+    dto.nome = marca.getNome();
+    return dto;
+  }
+
+  public static Marca paraDominio(MarcaDto dto) {
+    Marca marca = new Marca();
+    marca.setId(dto.id);
+    marca.setNome(dto.nome);
+    return marca;
+  }
+
+  public MarcaDto() {}
+
+  public MarcaDto(Long id, String nome) {
+    this.id = id;
+    this.nome = nome;
+  }
 
   public Long getId() {
     return id;

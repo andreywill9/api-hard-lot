@@ -18,4 +18,35 @@ public class PisCofins extends ObjetoDominio{
   @OneToMany(mappedBy = "pisCofins")
   private List<Produto> produtos;
 
+  public String getDescricao() {
+    return descricao;
+  }
+
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
+  }
+
+  public BigDecimal getAliquotaPis() {
+    return aliquotaPis;
+  }
+
+  public void setAliquotaPis(BigDecimal aliquotaPis) {
+    this.aliquotaPis = aliquotaPis;
+  }
+
+  public BigDecimal getAliquotaCofins() {
+    return aliquotaCofins;
+  }
+
+  public void setAliquotaCofins(BigDecimal aliquotaCofins) {
+    this.aliquotaCofins = aliquotaCofins;
+  }
+
+  public List<Produto> getProdutos() {
+    return produtos;
+  }
+
+  public void setProdutos(List<Produto> produtos) {
+    this.produtos = produtos;
+  }
 }

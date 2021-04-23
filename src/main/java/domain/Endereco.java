@@ -1,9 +1,7 @@
 package domain;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import java.util.List;
+import javax.persistence.OneToOne;
 
 @Entity(name = "endereco")
 public class Endereco extends ObjetoDominio {
@@ -22,8 +20,8 @@ public class Endereco extends ObjetoDominio {
 
   private String complemento;
 
-  @OneToMany(mappedBy = "endereco")
-  private List<Fornecedor> fornecedores;
+  @OneToOne(mappedBy = "endereco")
+  private Fornecedor fornecedor;
 
   public String getCep() {
     return cep;
@@ -81,11 +79,4 @@ public class Endereco extends ObjetoDominio {
     this.complemento = complemento;
   }
 
-  public List<Fornecedor> getFornecedores() {
-    return fornecedores;
-  }
-
-  public void setFornecedores(List<Fornecedor> fornecedores) {
-    this.fornecedores = fornecedores;
-  }
 }
