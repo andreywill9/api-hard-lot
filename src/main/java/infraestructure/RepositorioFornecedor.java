@@ -2,6 +2,7 @@ package infraestructure;
 
 import domain.Fornecedor;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.panache.common.Page;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
@@ -55,18 +56,9 @@ public class RepositorioFornecedor implements PanacheRepository<Fornecedor> {
     }
   }
 
-  public List<Fornecedor> buscarTodos() {
+  public List<Fornecedor> buscarPaginado(Integer numeroPagina) {
     try {
-      return findAll().list();
-    } catch (Exception e) {
-      e.printStackTrace();
-      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-    }
-  }
-
-  public Fornecedor buscarPorId(Long id) {
-    try {
-      return findById(id);
+      return findAll().page(Page.of(numeroPagina, 10)).list();
     } catch (Exception e) {
       e.printStackTrace();
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);

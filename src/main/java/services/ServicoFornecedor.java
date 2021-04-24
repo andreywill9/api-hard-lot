@@ -31,12 +31,11 @@ public class ServicoFornecedor {
     }
   }
 
-  public Response buscarTodosForncedores() {
+  public Response buscarTodosForncedores(Integer paginaAtual) {
     try {
       return Response.ok(
-          repositorioFornecedor.buscarTodos().stream().map(
-              FornecedorDto::instanciarDeDomain
-          ).collect(Collectors.toList())
+          repositorioFornecedor.buscarPaginado(paginaAtual).stream().map(FornecedorDto::instanciarDeDomain)
+              .collect(Collectors.toList())
       ).build();
     } catch (WebApplicationException we) {
       throw we;
