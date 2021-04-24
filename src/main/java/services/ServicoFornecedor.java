@@ -44,4 +44,19 @@ public class ServicoFornecedor {
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
     }
   }
+
+  @Transactional
+  public Response editarFornecedor(FornecedorDto dto, Long idFornecedor) {
+    try {
+      Fornecedor fornecedor = repositorioFornecedor.buscarPorId(idFornecedor);
+      repositorioFornecedor.verificarCnpj(dto.getCnpj(), idFornecedor);
+      Fornecedor.editarFornecedor(fornecedor, FornecedorDto.paraDomain(dto));
+      return Response.ok().build();
+    } catch (WebApplicationException we) {
+      throw we;
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
 }

@@ -28,4 +28,10 @@ public class FornecedorController {
     return servicoFornecedor.buscarTodosForncedores(pagina);
   }
 
+  @PUT
+  @Path("/{id}")
+  public Response editarFornecedor(@PathParam("id") Long idFornecedor, FornecedorDto dto) {
+    return servicoFornecedor.editarFornecedor(dto, idFornecedor);
+  }
+
 }

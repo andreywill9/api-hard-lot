@@ -65,4 +65,17 @@ public class RepositorioFornecedor implements PanacheRepository<Fornecedor> {
     }
   }
 
+  public Fornecedor buscarPorId(Long idFornecedor) {
+    try {
+      Fornecedor fornecedor = find("id = ?1", idFornecedor).firstResult();
+      if (fornecedor == null) throw new WebApplicationException("O Fornecedor não existe", Response.Status.NOT_FOUND);
+      return fornecedor;
+    } catch (WebApplicationException we) {
+      throw we;
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
 }
