@@ -1,6 +1,7 @@
 package infraestructure;
 
 import domain.Endereco;
+import domain.Fornecedor;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -21,6 +22,16 @@ public class RepositorioEndereco implements PanacheRepository<Endereco> {
       endereco.setLogradouro(enderecoAlterado.getLogradouro());
       endereco.setNumero(enderecoAlterado.getNumero());
       endereco.setComplemento(enderecoAlterado.getComplemento());
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @Transactional
+  public void excluirPorFornecedor(Fornecedor fornecedor) {
+    try {
+      delete("fornecedor = ?1", fornecedor);
     } catch (Exception e) {
       e.printStackTrace();
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
