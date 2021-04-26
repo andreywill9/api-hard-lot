@@ -31,7 +31,7 @@ public class ServicoFornecedor {
     }
   }
 
-  public Response buscarTodosForncedores(Integer paginaAtual) {
+  public Response buscarTodosFornecedores(Integer paginaAtual) {
     try {
       return Response.ok(
           repositorioFornecedor.buscarPaginado(paginaAtual).stream().map(FornecedorDto::instanciarDeDomain)

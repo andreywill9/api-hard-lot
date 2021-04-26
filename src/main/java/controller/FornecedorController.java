@@ -25,7 +25,7 @@ public class FornecedorController {
 
   @GET
   public Response buscarTodos(@QueryParam("pagina") Integer pagina) {
-    return servicoFornecedor.buscarTodosForncedores(pagina);
+    return servicoFornecedor.buscarTodosFornecedores(pagina);
   }
 
   @PUT
