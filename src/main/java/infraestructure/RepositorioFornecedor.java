@@ -23,6 +23,20 @@ public class RepositorioFornecedor implements PanacheRepository<Fornecedor> {
     }
   }
 
+  @Transactional
+  public void alterar(Fornecedor fornecedor, Fornecedor fornecedorAlterado) {
+    try {
+      fornecedor.setNomeFantasia(fornecedorAlterado.getNomeFantasia());
+      fornecedor.setRazaoSocial(fornecedorAlterado.getRazaoSocial());
+      fornecedor.setCnpj(fornecedorAlterado.getCnpj());
+      fornecedor.setTelefone(fornecedorAlterado.getTelefone());
+      fornecedor.setEmail(fornecedorAlterado.getEmail());
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   public void verificarCnpj(String cnpj, Long idFornecedor) {
     if (idFornecedor == null) verificarCnpjCadastro(cnpj);
     else verificarCnpjEdicao(cnpj, idFornecedor);

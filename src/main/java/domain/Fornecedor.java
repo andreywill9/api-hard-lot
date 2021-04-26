@@ -80,14 +80,4 @@ public class Fornecedor extends ObjetoDominio {
   public void setProdutos(List<Produto> produtos) {
     this.produtos = produtos;
   }
-
-  public static void editarFornecedor(Fornecedor fornecedor, Fornecedor fornecedorAlterado) {
-    fornecedor.setNomeFantasia(fornecedorAlterado.getNomeFantasia());
-    fornecedor.setRazaoSocial(fornecedorAlterado.getRazaoSocial());
-    fornecedor.setCnpj(fornecedorAlterado.getCnpj());
-    fornecedor.setTelefone(fornecedorAlterado.getTelefone());
-    fornecedor.setEmail(fornecedorAlterado.getEmail());
-    // TODO ALTERAR ENDERECO
-    fornecedor.setEndereco(fornecedorAlterado.getEndereco());
-  }
 }

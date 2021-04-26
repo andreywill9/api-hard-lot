@@ -2,6 +2,7 @@ package services;
 
 import controller.dto.FornecedorDto;
 import domain.Fornecedor;
+import infraestructure.RepositorioEndereco;
 import infraestructure.RepositorioFornecedor;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,6 +17,9 @@ public class ServicoFornecedor {
 
   @Inject
   RepositorioFornecedor repositorioFornecedor;
+
+  @Inject
+  RepositorioEndereco repositorioEndereco;
 
   @Transactional
   public Response cadastrar(FornecedorDto dto) {
@@ -50,7 +54,9 @@ public class ServicoFornecedor {
     try {
       Fornecedor fornecedor = repositorioFornecedor.buscarPorId(idFornecedor);
       repositorioFornecedor.verificarCnpj(dto.getCnpj(), idFornecedor);
-      Fornecedor.editarFornecedor(fornecedor, FornecedorDto.paraDomain(dto));
+      Fornecedor fornecedorAlterado = FornecedorDto.paraDomain(dto);
+      repositorioFornecedor.alterar(fornecedor, fornecedorAlterado);
+      repositorioEndereco.alterarEndereco(fornecedor.getEndereco(), fornecedorAlterado.getEndereco());
       return Response.ok().build();
     } catch (WebApplicationException we) {
       throw we;
