@@ -25,6 +25,8 @@ public class Fornecedor extends ObjetoDominio {
   @ManyToMany(mappedBy = "fornecedores")
   private List<Produto> produtos;
 
+  private Boolean status;
+
   public String getRazaoSocial() {
     return razaoSocial;
   }
@@ -79,5 +81,13 @@ public class Fornecedor extends ObjetoDominio {
 
   public void setProdutos(List<Produto> produtos) {
     this.produtos = produtos;
+  }
+
+  public Boolean getStatus() {
+    return status;
+  }
+
+  public void setStatus(Boolean status) {
+    this.status = status;
   }
 }

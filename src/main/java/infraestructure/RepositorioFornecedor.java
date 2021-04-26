@@ -37,6 +37,16 @@ public class RepositorioFornecedor implements PanacheRepository<Fornecedor> {
     }
   }
 
+  @Transactional
+  public void alterarStatus(Fornecedor fornecedor) {
+    try {
+      fornecedor.setStatus(!fornecedor.getStatus());
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   public void verificarCnpj(String cnpj, Long idFornecedor) {
     if (idFornecedor == null) verificarCnpjCadastro(cnpj);
     else verificarCnpjEdicao(cnpj, idFornecedor);

@@ -16,6 +16,8 @@ public class FornecedorDto {
 
   private String email;
 
+  private Boolean status;
+
   private EnderecoDto endereco;
 
   public static Fornecedor paraDomain(FornecedorDto dto) {
@@ -26,6 +28,7 @@ public class FornecedorDto {
     fornecedor.setCnpj(dto.cnpj);
     fornecedor.setEmail(dto.email);
     fornecedor.setTelefone(dto.telefone);
+    fornecedor.setStatus(dto.status == null || dto.status);
     fornecedor.setEndereco(EnderecoDto.paraDomain(dto.endereco));
     return fornecedor;
   }
@@ -38,6 +41,7 @@ public class FornecedorDto {
     dto.cnpj = fornecedor.getCnpj();
     dto.email = fornecedor.getEmail();
     dto.telefone = fornecedor.getTelefone();
+    dto.status = fornecedor.getStatus();
     dto.endereco = EnderecoDto.instanciarDeDomain(fornecedor.getEndereco());
     return dto;
   }
@@ -108,5 +112,13 @@ public class FornecedorDto {
 
   public void setEndereco(EnderecoDto endereco) {
     this.endereco = endereco;
+  }
+
+  public Boolean isStatus() {
+    return status;
+  }
+
+  public void setStatus(Boolean status) {
+    this.status = status;
   }
 }

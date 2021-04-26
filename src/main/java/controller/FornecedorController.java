@@ -34,4 +34,10 @@ public class FornecedorController {
     return servicoFornecedor.editarFornecedor(dto, idFornecedor);
   }
 
+  @PUT
+  @Path("/status/{id}")
+  public Response alterarStatus(@PathParam("id") Long idFornecedor) {
+    return servicoFornecedor.alterarStatusFornecedor(idFornecedor);
+  }
+
 }
