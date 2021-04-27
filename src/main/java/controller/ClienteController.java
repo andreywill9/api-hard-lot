@@ -15,22 +15,22 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ClienteController {
 
-    @Inject
-    ServicoCliente servicoCliente;
+  @Inject
+  ServicoCliente servicoCliente;
 
-    @POST
-    public Response cadastrarCliente(ClienteDto dto){
-        return servicoCliente.cadastrar(dto);
-    }
+  @POST
+  public Response cadastrarCliente(ClienteDto dto) {
+    return servicoCliente.cadastrar(dto);
+  }
 
-    @GET
-    public Response BuscarTodos(@QueryParam("pagina") Integer pagina){
-        return servicoCliente.buscarTodosClientes(pagina);
-    }
+  @GET
+  public Response BuscarTodos(@QueryParam("pagina") Integer pagina) {
+    return servicoCliente.buscarTodosClientes(pagina);
+  }
 
-    @PUT
-    @Path("/{id}")
-    public Response editarCliente(@PathParam("id") long idCliente, ClienteDto dto){
-        return servicoCliente.editarCliente(dto,idCliente);
-    }
+  @PUT
+  @Path("/{id}")
+  public Response editarCliente(@PathParam("id") Long idCliente, ClienteDto dto) {
+    return servicoCliente.editarCliente(dto, idCliente);
+  }
 }
