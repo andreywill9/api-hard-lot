@@ -88,4 +88,12 @@ public class RepositorioCliente implements PanacheRepository<Cliente> {
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
     }
   }
+  public void excluirCliente(Cliente cliente) {
+    try {
+      delete("id = ?1", cliente.getId());
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
 }

@@ -86,5 +86,4 @@ public class RepositorioProduto implements PanacheRepository<Produto> {
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
     }
   }
-
 }
