@@ -51,6 +51,8 @@ public class Produto extends ObjetoDominio {
   @JoinColumn(name = "icms_id")
   private Icms icms;
 
+  private Boolean status;
+
   public Produto() {}
 
   public String getNome() {
@@ -143,5 +145,13 @@ public class Produto extends ObjetoDominio {
 
   public Preco obterPrecoPorTipo(TipoPreco tipoPreco) {
     return getPrecos().stream().filter(preco -> preco.getTipoPreco().equals(tipoPreco)).findFirst().orElse(null);
+  }
+
+  public Boolean getStatus() {
+    return status;
+  }
+
+  public void setStatus(Boolean status) {
+    this.status = status;
   }
 }

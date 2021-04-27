@@ -43,6 +43,8 @@ public class ProdutoDto {
 
   private Long idIcms;
 
+  private Boolean status;
+
   public ProdutoDto() {}
 
   public static Produto paraDominio(ProdutoDto dto, PisCofins pisCofins, Icms icms, List<Fornecedor> fornecedores, Marca marca, List<Departamento> departamentos) throws ParseException {
@@ -67,6 +69,7 @@ public class ProdutoDto {
       Date fimPromocao = new SimpleDateFormat("dd/MM/yyyy").parse(dto.fimDataPromocao);
       precos.add(Preco.precoPromocional(dto.precoPromocional, produto, inicioPromocao, fimPromocao));
     }
+    produto.setStatus(dto.status == null || dto.status);
     produto.setPrecos(precos);
     return produto;
   }
@@ -90,6 +93,7 @@ public class ProdutoDto {
     dto.setFornecedores(produto.getFornecedores().stream().map(FornecedorDto::instanciarDeDomain).collect(Collectors.toList()));
     dto.setEstoque(produto.getEstoque());
     dto.setDescricao(produto.getDescricao());
+    dto.setStatus(produto.getStatus());
     // TODO PIS COFINS E ICMS
     return dto;
   }
@@ -212,5 +216,13 @@ public class ProdutoDto {
 
   public void setIdIcms(Long idIcms) {
     this.idIcms = idIcms;
+  }
+
+  public boolean isStatus() {
+    return status;
+  }
+
+  public void setStatus(boolean status) {
+    this.status = status;
   }
 }

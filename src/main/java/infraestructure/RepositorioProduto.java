@@ -64,4 +64,17 @@ public class RepositorioProduto implements PanacheRepository<Produto> {
     }
   }
 
+  public Produto buscarPorId(Long idProduto) {
+    try {
+      Produto produto = find("id = ?1", idProduto).firstResult();
+      if (produto == null) throw new WebApplicationException("O produto não existe", Response.Status.NOT_FOUND);
+      return produto;
+    } catch (WebApplicationException we) {
+      throw we;
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
 }

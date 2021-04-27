@@ -28,4 +28,10 @@ public class ProdutoController {
     return servicoProduto.obterPaginado(pagina);
   }
 
+  @PUT
+  @Path("/status/{id}")
+  public Response alterarStatusProduto(@PathParam("id") Long idProduto) {
+    return servicoProduto.alterarStatus(idProduto);
+  }
+
 }

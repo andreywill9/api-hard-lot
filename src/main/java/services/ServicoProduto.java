@@ -82,5 +82,19 @@ public class ServicoProduto {
     }
   }
 
+  @Transactional
+  public Response alterarStatus(Long idProduto) {
+    try {
+      Produto produto = repositorioProduto.buscarPorId(idProduto);
+      produto.setStatus(produto.getStatus());
+      return Response.ok().build();
+    } catch (WebApplicationException we) {
+      throw we;
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
 
 }
