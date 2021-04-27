@@ -1,5 +1,6 @@
 package services;
 
+import controller.dto.FornecedorDto;
 import controller.dto.ProdutoDto;
 import domain.*;
 import infraestructure.RepositorioProduto;
@@ -31,6 +32,9 @@ public class ServicoProduto {
   @Inject
   ServicoIcms servicoIcms;
 
+  @Inject
+  ServicoFornecedor servicoFornecedor;
+
   @Transactional
   public Response cadastrar(ProdutoDto dto) {
     try {
@@ -43,8 +47,9 @@ public class ServicoProduto {
       Icms icms = dto.getIdIcms() != null ?
           servicoIcms.obterPorId(dto.getIdIcms()) :
           null;
-      List<Fornecedor> fornecedores = new ArrayList<>();
-      // TODO buscar todos fornecedores
+      List<Fornecedor> fornecedores = dto.getFornecedores() != null ?
+          servicoFornecedor.buscarFornecedoresPorId(dto.getFornecedores().stream().map(FornecedorDto::getId).collect(Collectors.toList())) :
+          new ArrayList<>();
       Marca marca = dto.getMarca() != null ?
           servicoMarca.buscarOuCadastrar(dto.getMarca()) :
           null;

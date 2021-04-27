@@ -112,4 +112,13 @@ public class RepositorioFornecedor implements PanacheRepository<Fornecedor> {
     }
   }
 
+  public List<Fornecedor> buscarPorIds(List<Long> ids) {
+    try {
+      return find("id IN ?1", ids).list();
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
 }
