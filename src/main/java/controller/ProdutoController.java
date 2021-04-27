@@ -34,4 +34,10 @@ public class ProdutoController {
     return servicoProduto.alterarStatus(idProduto);
   }
 
+  @DELETE
+  @Path("/{id}")
+  public Response excluirProduto(@PathParam("id") Long idProduto) {
+    return servicoProduto.excluir(idProduto);
+  }
+
 }

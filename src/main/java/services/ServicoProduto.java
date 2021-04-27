@@ -3,6 +3,7 @@ package services;
 import controller.dto.FornecedorDto;
 import controller.dto.ProdutoDto;
 import domain.*;
+import infraestructure.RepositorioPreco;
 import infraestructure.RepositorioProduto;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -19,6 +20,9 @@ public class ServicoProduto {
 
   @Inject
   RepositorioProduto repositorioProduto;
+
+  @Inject
+  RepositorioPreco repositorioPreco;
 
   @Inject
   ServicoMarca servicoMarca;
@@ -96,5 +100,18 @@ public class ServicoProduto {
     }
   }
 
-
+  @Transactional
+  public Response excluir(Long idProduto) {
+    try {
+      Produto produto = repositorioProduto.buscarPorId(idProduto);
+      repositorioPreco.excluirPorProduto(produto);
+      repositorioProduto.excluirProduto(produto);
+      return Response.ok().build();
+    } catch (WebApplicationException we) {
+      throw we;
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
 }

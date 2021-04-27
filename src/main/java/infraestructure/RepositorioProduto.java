@@ -77,4 +77,14 @@ public class RepositorioProduto implements PanacheRepository<Produto> {
     }
   }
 
+  @Transactional
+  public void excluirProduto(Produto produto) {
+    try {
+      delete("id = ?1", produto.getId());
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
 }
