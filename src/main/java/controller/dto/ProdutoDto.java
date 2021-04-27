@@ -1,6 +1,7 @@
 package controller.dto;
 
 import domain.*;
+import domain.enums.TipoPreco;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -8,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProdutoDto {
 
@@ -67,6 +69,29 @@ public class ProdutoDto {
     }
     produto.setPrecos(precos);
     return produto;
+  }
+
+  public static ProdutoDto instanciarDeDominio(Produto produto) {
+    ProdutoDto dto = new ProdutoDto();
+    dto.setId(produto.getId());
+    dto.setNome(produto.getNome());
+    if (produto.getMarca() != null ) dto.setMarca(MarcaDto.instanciarDeDomain(produto.getMarca()));
+    dto.setPeso(produto.getPeso());
+    Preco precoPadrao = produto.obterPrecoPorTipo(TipoPreco.COMUM);
+    Preco precoPromocional = produto.obterPrecoPorTipo(TipoPreco.PROMOCIONAL);
+    if (precoPadrao != null) dto.setPrecoComum(precoPadrao.getValor());
+    if (precoPromocional != null) {
+      dto.setPrecoPromocional(precoPromocional.getValor());
+      dto.setInicioDataPromocao(new SimpleDateFormat("dd/MM/yyyy").format(precoPromocional.getInicioPromocao()));
+      dto.setFimDataPromocao(new SimpleDateFormat("dd/MM/yyyy").format(precoPromocional.getFimPromocao()));
+    }
+    dto.setCodigoBarras(produto.getCodigoBarras());
+    dto.setDepartamentos(produto.getDepartamentos().stream().map(DepartamentoDto::instanicarDeDomain).collect(Collectors.toList()));
+    dto.setFornecedores(produto.getFornecedores().stream().map(FornecedorDto::instanciarDeDomain).collect(Collectors.toList()));
+    dto.setEstoque(produto.getEstoque());
+    dto.setDescricao(produto.getDescricao());
+    // TODO PIS COFINS E ICMS
+    return dto;
   }
 
   public Long getId() {

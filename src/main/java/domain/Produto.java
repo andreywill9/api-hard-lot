@@ -1,5 +1,7 @@
 package domain;
 
+import domain.enums.TipoPreco;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -137,5 +139,9 @@ public class Produto extends ObjetoDominio {
 
   public void setIcms(Icms icms) {
     this.icms = icms;
+  }
+
+  public Preco obterPrecoPorTipo(TipoPreco tipoPreco) {
+    return getPrecos().stream().filter(preco -> preco.getTipoPreco().equals(tipoPreco)).findFirst().orElse(null);
   }
 }

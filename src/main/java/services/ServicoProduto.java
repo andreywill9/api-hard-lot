@@ -69,5 +69,18 @@ public class ServicoProduto {
         dto.getDepartamentos().stream().map(servicoDepartamento::buscarOuCadastrar).collect(Collectors.toList());
   }
 
+  public Response obterPaginado(Integer pagina) {
+    try {
+      return Response.ok(
+          repositorioProduto.buscarPaginado(pagina).stream().map(ProdutoDto::instanciarDeDominio).collect(Collectors.toList())
+      ).build();
+    } catch (WebApplicationException we) {
+      throw we;
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
 
 }

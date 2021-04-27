@@ -2,11 +2,13 @@ package infraestructure;
 
 import domain.Produto;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.panache.common.Page;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @ApplicationScoped
 public class RepositorioProduto implements PanacheRepository<Produto> {
@@ -47,6 +49,15 @@ public class RepositorioProduto implements PanacheRepository<Produto> {
       if (produto != null) throw new WebApplicationException(Response.Status.CONFLICT);
     } catch (WebApplicationException we) {
       throw we;
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  public List<Produto> buscarPaginado(Integer pagina) {
+    try {
+      return findAll().page(Page.of(pagina, 10)).list();
     } catch (Exception e) {
       e.printStackTrace();
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
