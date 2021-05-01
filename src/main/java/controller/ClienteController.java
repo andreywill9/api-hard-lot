@@ -24,7 +24,7 @@ public class ClienteController {
   }
 
   @GET
-  public Response BuscarTodos(@QueryParam("pagina") Integer pagina) {
+  public Response buscarTodos(@QueryParam("pagina") Integer pagina) {
     return servicoCliente.buscarTodosClientes(pagina);
   }
 
