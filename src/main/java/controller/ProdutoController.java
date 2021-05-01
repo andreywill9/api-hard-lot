@@ -29,6 +29,12 @@ public class ProdutoController {
   }
 
   @PUT
+  @Path("/{id}")
+  public Response alterarProduto(@PathParam("id") Long idProduto, ProdutoDto dto) {
+    return servicoProduto.editar(dto, idProduto);
+  }
+
+  @PUT
   @Path("/status/{id}")
   public Response alterarStatusProduto(@PathParam("id") Long idProduto) {
     return servicoProduto.alterarStatus(idProduto);

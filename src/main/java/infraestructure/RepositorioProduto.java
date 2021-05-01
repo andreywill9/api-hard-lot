@@ -1,5 +1,7 @@
 package infraestructure;
 
+import domain.Departamento;
+import domain.Fornecedor;
 import domain.Produto;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.panache.common.Page;
@@ -9,6 +11,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class RepositorioProduto implements PanacheRepository<Produto> {
@@ -85,5 +88,28 @@ public class RepositorioProduto implements PanacheRepository<Produto> {
       e.printStackTrace();
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  @Transactional
+  public void editarProduto(Produto produto, Produto produtoAlterado) {
+    produto.setNome(produtoAlterado.getNome());
+    produto.setDescricao(produtoAlterado.getDescricao());
+    produto.setPisCofins(produtoAlterado.getPisCofins());
+    produto.setIcms(produtoAlterado.getIcms());
+    produto.setMarca(produtoAlterado.getMarca());
+    produto.setCodigoBarras(produtoAlterado.getCodigoBarras());
+    produto.setPeso(produtoAlterado.getPeso());
+    List<Departamento> departamentosRemover = produto.getDepartamentos().stream()
+        .filter(departamento -> !produtoAlterado.getDepartamentos().contains(departamento)).collect(Collectors.toList());
+    List<Departamento> departamentosAdicionar = produtoAlterado.getDepartamentos().stream()
+        .filter(departamento -> !produto.getDepartamentos().contains(departamento)).collect(Collectors.toList());
+    produto.getDepartamentos().removeAll(departamentosRemover);
+    produto.getDepartamentos().addAll(departamentosAdicionar);
+    List<Fornecedor> fornecedoresRemover = produto.getFornecedores().stream()
+        .filter(fornecedor -> !produtoAlterado.getFornecedores().contains(fornecedor)).collect(Collectors.toList());
+    List<Fornecedor> fornecedoresAdicionar = produtoAlterado.getFornecedores().stream()
+        .filter(fornecedor -> !produto.getFornecedores().contains(fornecedor)).collect(Collectors.toList());
+    produto.getFornecedores().removeAll(fornecedoresRemover);
+    produto.getFornecedores().addAll(fornecedoresAdicionar);
   }
 }

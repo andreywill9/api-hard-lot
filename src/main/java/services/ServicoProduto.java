@@ -90,7 +90,34 @@ public class ServicoProduto {
   public Response alterarStatus(Long idProduto) {
     try {
       Produto produto = repositorioProduto.buscarPorId(idProduto);
-      produto.setStatus(produto.getStatus());
+      produto.setStatus(!produto.getStatus());
+      return Response.ok().build();
+    } catch (WebApplicationException we) {
+      throw we;
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  public Response editar(ProdutoDto dto, Long idProduto) {
+    try {
+      Produto produto = repositorioProduto.buscarPorId(idProduto);
+      PisCofins pisCofins = dto.getIdPisCofins() != null ?
+          servicoPisCofins.obterPorId(dto.getIdPisCofins()) :
+          null;
+      Icms icms = dto.getIdIcms() != null ?
+          servicoIcms.obterPorId(dto.getIdIcms()) :
+          null;
+      List<Fornecedor> fornecedores = dto.getFornecedores() != null ?
+          servicoFornecedor.buscarFornecedoresPorId(dto.getFornecedores().stream().map(FornecedorDto::getId).collect(Collectors.toList())) :
+          new ArrayList<>();
+      Marca marca = dto.getMarca() != null ?
+          servicoMarca.buscarOuCadastrar(dto.getMarca()) :
+          null;
+      Produto produtoAlterado = ProdutoDto.paraDominio(dto, pisCofins, icms, fornecedores, marca, obterDepartamentos(dto));
+      repositorioProduto.editarProduto(produto, produtoAlterado);
+      repositorioPreco.atualizarPrecos(produtoAlterado);
       return Response.ok().build();
     } catch (WebApplicationException we) {
       throw we;
