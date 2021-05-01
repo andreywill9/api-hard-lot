@@ -26,7 +26,7 @@ public class RepositorioPreco implements PanacheRepository<Preco> {
   @Transactional
   public void atualizarPrecos(Produto produtoAlterado) {
    try {
-     Preco precoPadrao = find("produto = ?1 AND tipoProduto = ?2", produtoAlterado, TipoPreco.COMUM)
+     Preco precoPadrao = find("produto = ?1 AND tipoPreco = ?2", produtoAlterado, TipoPreco.COMUM)
          .firstResult();
      Preco precoPromocional = find("produto = ?1 AND tipoPreco = ?2", produtoAlterado, TipoPreco.PROMOCIONAL)
          .firstResult();
