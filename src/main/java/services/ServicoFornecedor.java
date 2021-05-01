@@ -81,20 +81,6 @@ public class ServicoFornecedor {
     }
   }
 
-  public Response excluirFornecedor(Long idFornecedor) {
-    try {
-      Fornecedor fornecedor = repositorioFornecedor.buscarPorId(idFornecedor);
-      repositorioFornecedor.excluir(fornecedor);
-      repositorioEndereco.excluirPorFornecedor(fornecedor);
-      return Response.ok().build();
-    } catch (WebApplicationException we) {
-      throw  we;
-    } catch (Exception e) {
-      e.printStackTrace();
-      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-    }
-  }
-
   public List<Fornecedor> buscarFornecedoresPorId(List<Long> ids) {
     return repositorioFornecedor.buscarPorIds(ids);
   }

@@ -65,16 +65,4 @@ public class ServicoCliente {
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
     }
   }
-  public Response excluirCliente(Long idCliente){
-    try{
-        Cliente cliente = repositorioCliente.buscarPorId(idCliente);
-        repositorioCliente.excluirCliente(cliente);
-        return  Response.ok().build();
-      }catch (WebApplicationException we) {
-      throw we;
-    } catch (Exception e) {
-      e.printStackTrace();
-      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-    }
-  }
 }

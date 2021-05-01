@@ -75,25 +75,4 @@ public class RepositorioCliente implements PanacheRepository<Cliente> {
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
     }
   }
-
-  public Cliente buscarPorCpf(String cpf) {
-    try {
-      Cliente cliente = find("cpf = ?1", cpf).firstResult();
-      if (cliente == null) throw new WebApplicationException("Cliente não cadastrado", Response.Status.NOT_FOUND);
-      return cliente;
-    } catch (WebApplicationException we) {
-      throw we;
-    } catch (Exception e) {
-      e.printStackTrace();
-      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-    }
-  }
-  public void excluirCliente(Cliente cliente) {
-    try {
-      delete("id = ?1", cliente.getId());
-    } catch (Exception e) {
-      e.printStackTrace();
-      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-    }
-  }
 }

@@ -99,19 +99,4 @@ public class ServicoProduto {
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
     }
   }
-
-  @Transactional
-  public Response excluir(Long idProduto) {
-    try {
-      Produto produto = repositorioProduto.buscarPorId(idProduto);
-      repositorioPreco.excluirPorProduto(produto);
-      repositorioProduto.excluirProduto(produto);
-      return Response.ok().build();
-    } catch (WebApplicationException we) {
-      throw we;
-    } catch (Exception e) {
-      e.printStackTrace();
-      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-    }
-  }
 }

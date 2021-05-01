@@ -40,10 +40,4 @@ public class FornecedorController {
     return servicoFornecedor.alterarStatusFornecedor(idFornecedor);
   }
 
-  @DELETE
-  @Path("/{id}")
-  public Response excluirFornecedor(@PathParam("id") Long idFornecedor) {
-    return servicoFornecedor.excluirFornecedor(idFornecedor);
-  }
-
 }

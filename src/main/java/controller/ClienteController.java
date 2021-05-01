@@ -33,10 +33,4 @@ public class ClienteController {
   public Response editarCliente(@PathParam("id") Long idCliente, ClienteDto dto) {
     return servicoCliente.editarCliente(dto, idCliente);
   }
-
-  @DELETE
-  @Path("/{id}")
-  public Response excluirCliente(@PathParam("id") Long idCliente){
-    return servicoCliente.excluirCliente(idCliente);
-  }
 }
