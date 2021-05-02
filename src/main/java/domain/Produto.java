@@ -53,6 +53,9 @@ public class Produto extends ObjetoDominio {
 
   private Boolean status;
 
+  @Lob
+  private String imagem;
+
   public Produto() {}
 
   public String getNome() {
@@ -153,5 +156,13 @@ public class Produto extends ObjetoDominio {
 
   public void setStatus(Boolean status) {
     this.status = status;
+  }
+
+  public String getImagem() {
+    return imagem;
+  }
+
+  public void setImagem(String imagem) {
+    this.imagem = imagem;
   }
 }

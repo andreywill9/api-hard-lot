@@ -45,6 +45,8 @@ public class ProdutoDto {
 
   private Boolean status;
 
+  private String imagem;
+
   public ProdutoDto() {}
 
   public static Produto paraDominio(ProdutoDto dto, PisCofins pisCofins, Icms icms, List<Fornecedor> fornecedores, Marca marca, List<Departamento> departamentos) throws ParseException {
@@ -71,6 +73,7 @@ public class ProdutoDto {
     }
     produto.setStatus(dto.status == null || dto.status);
     produto.setPrecos(precos);
+    produto.setImagem(dto.imagem);
     return produto;
   }
 
@@ -94,6 +97,7 @@ public class ProdutoDto {
     dto.setEstoque(produto.getEstoque());
     dto.setDescricao(produto.getDescricao());
     dto.setStatus(produto.getStatus());
+    dto.setImagem(produto.getImagem());
     // TODO PIS COFINS E ICMS
     return dto;
   }
@@ -224,5 +228,13 @@ public class ProdutoDto {
 
   public void setStatus(boolean status) {
     this.status = status;
+  }
+
+  public String getImagem() {
+    return imagem;
+  }
+
+  public void setImagem(String imagem) {
+    this.imagem = imagem;
   }
 }

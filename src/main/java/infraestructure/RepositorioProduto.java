@@ -100,6 +100,7 @@ public class RepositorioProduto implements PanacheRepository<Produto> {
     produto.setMarca(produtoAlterado.getMarca());
     produto.setCodigoBarras(produtoAlterado.getCodigoBarras());
     produto.setPeso(produtoAlterado.getPeso());
+    produto.setImagem(produtoAlterado.getImagem());
     List<Departamento> departamentosRemover = produto.getDepartamentos().stream()
         .filter(departamento -> !produtoAlterado.getDepartamentos().contains(departamento)).collect(Collectors.toList());
     List<Departamento> departamentosAdicionar = produtoAlterado.getDepartamentos().stream()
