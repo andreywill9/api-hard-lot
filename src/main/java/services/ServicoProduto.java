@@ -86,6 +86,17 @@ public class ServicoProduto {
     }
   }
 
+  public Response obterQuantidade() {
+    try {
+      return Response.ok(repositorioProduto.obterQuantidade()).build();
+    } catch (WebApplicationException we) {
+      throw we;
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   @Transactional
   public Response alterarStatus(Long idProduto) {
     try {

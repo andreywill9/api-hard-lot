@@ -28,6 +28,12 @@ public class ProdutoController {
     return servicoProduto.obterPaginado(pagina);
   }
 
+  @GET
+  @Path("/quantidade")
+  public Response buscarQuantidade() {
+    return servicoProduto.obterQuantidade();
+  }
+
   @PUT
   @Path("/{id}")
   public Response alterarProduto(@PathParam("id") Long idProduto, ProdutoDto dto) {

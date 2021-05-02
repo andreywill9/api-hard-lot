@@ -68,6 +68,15 @@ public class RepositorioProduto implements PanacheRepository<Produto> {
     }
   }
 
+  public Long obterQuantidade() {
+    try {
+      return count();
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   public Produto buscarPorId(Long idProduto) {
     try {
       Produto produto = find("id = ?1", idProduto).firstResult();
