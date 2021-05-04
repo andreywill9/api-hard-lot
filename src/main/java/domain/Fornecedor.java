@@ -27,6 +27,9 @@ public class Fornecedor extends ObjetoDominio {
 
   private Boolean status;
 
+  @OneToMany(mappedBy = "fornecedor")
+  private List<Compra> compras;
+
   public String getRazaoSocial() {
     return razaoSocial;
   }
