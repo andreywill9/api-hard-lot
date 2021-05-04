@@ -1,6 +1,7 @@
 package domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "cliente")
 public class Cliente extends ObjetoDominio {
@@ -17,6 +18,9 @@ public class Cliente extends ObjetoDominio {
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "endereco_id", referencedColumnName = "id")
   private Endereco endereco;
+
+  @OneToMany(mappedBy = "cliente")
+  private List<Venda> vendas;
 
   public String getNomeCompleto() {
     return nomeCompleto;
@@ -56,6 +60,14 @@ public class Cliente extends ObjetoDominio {
 
   public void setEndereco(Endereco endereco) {
     this.endereco = endereco;
+  }
+
+  public List<Venda> getVendas() {
+    return vendas;
+  }
+
+  public void setVendas(List<Venda> vendas) {
+    this.vendas = vendas;
   }
 
   public static void editarCliente(Cliente cliente, Cliente alterado) {
