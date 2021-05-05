@@ -1,18 +1,18 @@
 package domain;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name = "item_ajuste")
 public class ItemAjuste extends ObjetoDominio {
 
   @ManyToOne()
-  @JoinTable(name = "ajuste_id")
+  @JoinColumn(name = "ajuste_id")
   private AjusteEstoque ajuste;
 
   @ManyToOne()
-  @JoinTable(name = "produto_id")
+  @JoinColumn(name = "produto_id")
   private Produto produto;
 
   private Integer quantidade;
