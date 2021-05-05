@@ -21,7 +21,9 @@ public class Compra extends ObjetoDominio {
   @OneToMany(mappedBy = "compra")
   private List<ItemCompra> itens;
 
-  // TODO COLABORADOR
+  @ManyToOne()
+  @JoinColumn(name = "colaborador_id")
+  private Colaborador colaborador;
 
   public Fornecedor getFornecedor() {
     return fornecedor;
@@ -53,5 +55,13 @@ public class Compra extends ObjetoDominio {
 
   public void setItens(List<ItemCompra> itens) {
     this.itens = itens;
+  }
+
+  public Colaborador getColaborador() {
+    return colaborador;
+  }
+
+  public void setColaborador(Colaborador colaborador) {
+    this.colaborador = colaborador;
   }
 }

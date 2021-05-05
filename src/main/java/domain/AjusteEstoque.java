@@ -3,9 +3,7 @@ package domain;
 import domain.enums.StatusAjuste;
 import domain.enums.TipoAjuste;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "ajuste_estoque")
@@ -15,7 +13,9 @@ public class AjusteEstoque extends ObjetoDominio {
 
   private String motivo;
 
-  // TODO COLABORADOR
+  @ManyToOne()
+  @JoinColumn(name = "colaborador_id")
+  private Colaborador colaborador;
 
   @Column(name = "tipo_ajuste")
   private TipoAjuste tipoAjuste;
@@ -63,5 +63,13 @@ public class AjusteEstoque extends ObjetoDominio {
 
   public void setItens(List<ItemAjuste> itens) {
     this.itens = itens;
+  }
+
+  public Colaborador getColaborador() {
+    return colaborador;
+  }
+
+  public void setColaborador(Colaborador colaborador) {
+    this.colaborador = colaborador;
   }
 }

@@ -23,6 +23,12 @@ public class Endereco extends ObjetoDominio {
   @OneToOne(mappedBy = "endereco")
   private Fornecedor fornecedor;
 
+  @OneToOne(mappedBy = "endereco")
+  private Cliente cliente;
+
+  @OneToOne(mappedBy = "endereco")
+  private Colaborador colaborador;
+
   public String getCep() {
     return cep;
   }
@@ -79,4 +85,27 @@ public class Endereco extends ObjetoDominio {
     this.complemento = complemento;
   }
 
+  public Fornecedor getFornecedor() {
+    return fornecedor;
+  }
+
+  public void setFornecedor(Fornecedor fornecedor) {
+    this.fornecedor = fornecedor;
+  }
+
+  public Cliente getCliente() {
+    return cliente;
+  }
+
+  public void setCliente(Cliente cliente) {
+    this.cliente = cliente;
+  }
+
+  public Colaborador getColaborador() {
+    return colaborador;
+  }
+
+  public void setColaborador(Colaborador colaborador) {
+    this.colaborador = colaborador;
+  }
 }

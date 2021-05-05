@@ -17,7 +17,9 @@ public class Devolucao extends ObjetoDominio {
 
   private StatusDevolucao status;
 
-  // TODO COLABORADOR
+  @ManyToOne()
+  @JoinColumn(name = "colaborador_id")
+  private Colaborador colaborador;
 
   private String descricao;
 
@@ -54,5 +56,13 @@ public class Devolucao extends ObjetoDominio {
 
   public void setItens(List<ItemDevolucao> itens) {
     this.itens = itens;
+  }
+
+  public Colaborador getColaborador() {
+    return colaborador;
+  }
+
+  public void setColaborador(Colaborador colaborador) {
+    this.colaborador = colaborador;
   }
 }

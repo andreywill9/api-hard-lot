@@ -24,6 +24,10 @@ public class Venda extends ObjetoDominio {
   @OneToMany(mappedBy = "venda")
   private List<Pagamento> pagamentos;
 
+  @ManyToOne()
+  @JoinColumn(name = "colaborador_id")
+  private Colaborador colaborador;
+
   public Venda(Cliente cliente, BigDecimal total, BigDecimal valorPago, BigDecimal troco, List<ItemVenda> itens, List<Pagamento> pagamentos) {
     this.cliente = cliente;
     this.total = total;
@@ -79,5 +83,13 @@ public class Venda extends ObjetoDominio {
 
   public void setPagamentos(List<Pagamento> pagamentos) {
     this.pagamentos = pagamentos;
+  }
+
+  public Colaborador getColaborador() {
+    return colaborador;
+  }
+
+  public void setColaborador(Colaborador colaborador) {
+    this.colaborador = colaborador;
   }
 }
