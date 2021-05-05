@@ -41,7 +41,13 @@ public class ProdutoDto {
 
   private Long idPisCofins;
 
+  private BigDecimal aliquotaPis;
+
+  private BigDecimal aliquotaCofins;
+
   private Long idIcms;
+
+  private BigDecimal aliquotaIcms;
 
   private Boolean status;
 
@@ -98,7 +104,11 @@ public class ProdutoDto {
     dto.setDescricao(produto.getDescricao());
     dto.setStatus(produto.getStatus());
     dto.setImagem(produto.getImagem());
-    // TODO PIS COFINS E ICMS
+    dto.setIdPisCofins(produto.getPisCofins() != null ? produto.getPisCofins().getId() : null);
+    dto.setAliquotaPis(produto.getPisCofins() != null ? produto.getPisCofins().getAliquotaPis() : null);
+    dto.setAliquotaCofins(produto.getPisCofins() != null ? produto.getPisCofins().getAliquotaCofins() : null);
+    dto.setIdIcms(produto.getIcms() != null ? produto.getIcms().getId() : null);
+    dto.setAliquotaIcms(produto.getIcms() != null ? produto.getIcms().getAliquota() : null);
     return dto;
   }
 
@@ -236,5 +246,37 @@ public class ProdutoDto {
 
   public void setImagem(String imagem) {
     this.imagem = imagem;
+  }
+
+  public BigDecimal getAliquotaPis() {
+    return aliquotaPis;
+  }
+
+  public void setAliquotaPis(BigDecimal aliquotaPis) {
+    this.aliquotaPis = aliquotaPis;
+  }
+
+  public BigDecimal getAliquotaCofins() {
+    return aliquotaCofins;
+  }
+
+  public void setAliquotaCofins(BigDecimal aliquotaCofins) {
+    this.aliquotaCofins = aliquotaCofins;
+  }
+
+  public BigDecimal getAliquotaIcms() {
+    return aliquotaIcms;
+  }
+
+  public void setAliquotaIcms(BigDecimal aliquotaIcms) {
+    this.aliquotaIcms = aliquotaIcms;
+  }
+
+  public Boolean getStatus() {
+    return status;
+  }
+
+  public void setStatus(Boolean status) {
+    this.status = status;
   }
 }
