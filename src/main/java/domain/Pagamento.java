@@ -4,6 +4,7 @@ import domain.enums.FormaPagamento;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 public class Pagamento extends ObjetoDominio{
 
   @ManyToOne
-  @Column(name = "venda_id")
+  @JoinColumn(name = "venda_id")
   Venda venda;
 
   @Column(name = "forma_pagamento")
@@ -20,13 +21,6 @@ public class Pagamento extends ObjetoDominio{
   BigDecimal valor;
 
   Integer parcelas;
-
-  public Pagamento(Venda venda, FormaPagamento forma, BigDecimal valor, Integer parcelas) {
-    this.venda = venda;
-    this.forma = forma;
-    this.valor = valor;
-    this.parcelas = parcelas;
-  }
 
   public Venda getVenda() {
     return venda;

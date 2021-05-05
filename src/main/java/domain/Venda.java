@@ -28,15 +28,6 @@ public class Venda extends ObjetoDominio {
   @JoinColumn(name = "colaborador_id")
   private Colaborador colaborador;
 
-  public Venda(Cliente cliente, BigDecimal total, BigDecimal valorPago, BigDecimal troco, List<ItemVenda> itens, List<Pagamento> pagamentos) {
-    this.cliente = cliente;
-    this.total = total;
-    this.valorPago = valorPago;
-    this.troco = troco;
-    this.itens = itens;
-    this.pagamentos = pagamentos;
-  }
-
   public Cliente getCliente() {
     return cliente;
   }

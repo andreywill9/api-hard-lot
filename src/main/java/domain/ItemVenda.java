@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class ItemVenda extends ObjetoDominio {
 
   @ManyToOne
-  @Column(name = "venda_id")
+  @JoinColumn(name = "venda_id")
   Venda venda;
 
   @OneToOne()
@@ -19,14 +19,6 @@ public class ItemVenda extends ObjetoDominio {
   Integer quantidade;
 
   BigDecimal total;
-
-  public ItemVenda(Venda venda, Produto produto, BigDecimal valorUnitario, Integer quantidade, BigDecimal total) {
-    this.venda = venda;
-    this.produto = produto;
-    this.valorUnitario = valorUnitario;
-    this.quantidade = quantidade;
-    this.total = total;
-  }
 
   public Venda getVenda() {
     return venda;
