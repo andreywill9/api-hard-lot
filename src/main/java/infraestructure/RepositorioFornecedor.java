@@ -82,7 +82,16 @@ public class RepositorioFornecedor implements PanacheRepository<Fornecedor> {
 
   public List<Fornecedor> buscarPaginado(Integer numeroPagina) {
     try {
-      return findAll().page(Page.of(numeroPagina, 10)).list();
+      return find("").page(Page.of(numeroPagina, 15)).list();
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  public List<Fornecedor> buscarTodos() {
+    try {
+      return find("").list();
     } catch (Exception e) {
       e.printStackTrace();
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);

@@ -36,11 +36,24 @@ public class ServicoFornecedor {
     }
   }
 
-  public Response buscarTodosFornecedores(Integer paginaAtual) {
+  public Response buscarFornecedoresPaginado(Integer paginaAtual) {
     try {
       return Response.ok(
           repositorioFornecedor.buscarPaginado(paginaAtual).stream().map(FornecedorDto::instanciarDeDomain)
               .collect(Collectors.toList())
+      ).build();
+    } catch (WebApplicationException we) {
+      throw we;
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  public Response buscarTodosFornecedores() {
+    try {
+      return Response.ok(
+          repositorioFornecedor.buscarTodos().stream().map(FornecedorDto::instanciarDeDomain).collect(Collectors.toList())
       ).build();
     } catch (WebApplicationException we) {
       throw we;

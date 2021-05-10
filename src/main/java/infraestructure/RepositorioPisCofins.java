@@ -22,7 +22,7 @@ public class RepositorioPisCofins implements PanacheRepository<PisCofins> {
 
   public List<PisCofins> obterTodos() {
     try {
-      return findAll().firstResult();
+      return find("").list();
     } catch (Exception e) {
       e.printStackTrace();
       throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
