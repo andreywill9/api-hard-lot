@@ -9,7 +9,7 @@ public class Marca extends ObjetoDominio {
 
   private String nome;
 
-  @OneToMany()
+  @OneToMany(mappedBy = "marca")
   private List<Produto> produtos;
 
   public String getNome() {
